@@ -10,3 +10,4 @@ import { typeORMConfig } from './configs/typeorm.config';
   providers: [],
 })
 export class AppModule {}
+//3:16:18
