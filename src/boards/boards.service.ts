@@ -17,9 +17,29 @@ export class BoardsService {
   // //model 에서 생성한 타입
   // //선택사항이지만 , 다른 코드 사용시 에러가 나서
   // //확인하기 좋음, 가독성증가
+
+  async getAllBoards(): Promise<Board[]> {
+    return this.boardRepository.find();
+  }
   // getAllBoards(): Board[] {
   //   return this.boards;
   // }
+
+  async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+    // const { title, description } = createBoardDto;
+    // //dto 의 값들을 가져옴.
+    // const board = this.boardRepository.create({
+    //   //객체 생성
+    //   title,
+    //   description,
+    //   status: BoardStatus.PUBLIC,
+    // });
+    // await this.boardRepository.save(board);
+    // return board;
+
+    return this.boardRepository.createBoard(createBoardDto);
+    //3:21
+  }
   // createBoard(createBoardDto: CreateBoardDto) {
   //   const { title, description } = createBoardDto;
   //   const board: Board = {
@@ -36,6 +56,14 @@ export class BoardsService {
   //   return board;
   //   //어떤게 저장되었는지 return
   // }
+  async getBoardById(id: number): Promise<Board> {
+    const found = await this.boardRepository.findOne(id);
+    if (!found) {
+      throw new NotFoundException(`can not find ${id}`);
+    }
+    return found;
+  }
+
   // getBoardById(id: string): Board {
   //   const found = this.boards.find((board) => board.id === id);
   //   if (!found) {
@@ -43,39 +71,31 @@ export class BoardsService {
   //   }
   //   return found;
   // }
+  async deleteBoard(id: number): Promise<void> {
+    const result = await this.boardRepository.delete(id);
+    if (result.affected === 0) {
+      //영향받는 결과의 수가  0이면
+      throw new NotFoundException(`can not find ${id}`);
+    }
+    console.log('result', result);
+  }
   // deleteBoard(id: string): void {
   //   const found = this.getBoardById(id);
   //   this.boards = this.boards.filter((board) => board.id !== found.id);
   // }
+
+  async updateBoardStatus(id: number, status: BoardStatus): Promise<Board> {
+    const board = await this.getBoardById(id);
+    board.status = status;
+    await this.boardRepository.save(board);
+
+    return board;
+  }
   // updateBoardStatus(id: string, status: BoardStatus): Board {
   //   const board = this.getBoardById(id);
   //   board.status = status;
   //   return board;
   // }
-
-  async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
-    const { title, description } = createBoardDto;
-    //dto 의 값들을 가져옴.
-
-    const board = this.boardRepository.create({
-      //객체 생성
-      title,
-      description,
-      status: BoardStatus.PUBLIC,
-    });
-
-    await this.boardRepository.save(board);
-    return board;
-  }
-
-  async getBoardById(id: number): Promise<Board> {
-    //RETURN 값은 PROMISE 이며 , 타입은 ENTITY 를 가져와야 함. 엔티티에 컬럼 정의가 되어있다.
-
-    const found = await this.boardRepository.findOne(id);
-
-    if (!found) {
-      throw new NotFoundException(`can not find ${id}`);
-    }
-    return found;
-  }
 }
+
+
