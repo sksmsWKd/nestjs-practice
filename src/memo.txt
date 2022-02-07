@@ -1,0 +1,15 @@
+nest auth system buildup
+1. module, controller, service, repository
+
+2.Dto를 이용하여 request로 들어오는 값을 정의 (타입 등)
+
+3.Dto 의 값 하나하나를 class-validator를 이용하여 유효성 조건
+3-1.컨트롤러로 요청이 들어올시 , Dto의 유효성 조건에 맞게 체크하기위해 ValidationPipe 를 넣어야 함.
+
+4.핸들러 시행전, ValidationPipe가 체크할것임
+
+5.엔티티에 , unique decorator를 사용해 유일값 부여 가능.
+
+6.암호화 할 정보는 , bcryptjs사용.
+6-1. 
+
