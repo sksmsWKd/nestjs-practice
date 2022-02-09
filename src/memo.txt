@@ -11,5 +11,16 @@ nest auth system buildup
 5.엔티티에 , unique decorator를 사용해 유일값 부여 가능.
 
 6.암호화 할 정보는 , bcryptjs사용.
-6-1. 
+6-1. 로그인시 , jwt토큰 발급.
+		jwt관련 설정들을 다른곳에서 사용할수 있도록, 
+		jwt설정 클래스(PassportStrategy 를 상속받는) 에서 @Injectable()데코레이션 사용.
+
+
+7.Nest JS 는 여러가지 미들웨어(로 취급되는것들 )가 있다.
+Pipes-유효성체크,데이터변환 
+-> 요청이 컨트롤러에 도달전에 먼저. 페이로드 변환
+Filter-오류 처리
+Guards-인증 미들웨어, 지정된 경로 이용하는 사용자 통제 , Interceptors-... 
+
+
 

@@ -19,7 +19,8 @@ export class BoardsService {
   // //확인하기 좋음, 가독성증가
 
   async getAllBoards(): Promise<Board[]> {
-    return this.boardRepository.find();
+    const result = await this.boardRepository;
+    return result;
   }
   // getAllBoards(): Board[] {
   //   return this.boards;
@@ -97,5 +98,3 @@ export class BoardsService {
   //   return board;
   // }
 }
-
-

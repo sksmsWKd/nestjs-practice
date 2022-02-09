@@ -1,6 +1,16 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Req,
+  UseGuards,
+  ValidationPipe,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
+import { GetUser } from './get-user.decorator';
+import { User } from './user.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -15,8 +25,21 @@ export class AuthController {
     //postman 에 , /auth/signup 으로 raw, json 보내볼것.
   }
 
-  @Post('/signIn')
-  signIn(@Body(ValidationPipe) authCredentialDTO: AuthCredentialsDto) {
+  @Post('/signin')
+  signIn(
+    @Body(ValidationPipe) authCredentialDTO: AuthCredentialsDto,
+  ): Promise<{ accessToken: string }> {
     return this.authService.signIn(authCredentialDTO);
+  }
+
+  @Post('/test')
+  @UseGuards(AuthGuard())
+  //req에 user객체 넣어줌.
+  test(@GetUser() user: User) {
+    //req.user
+    console.log('user', user);
+    //req.user 가 아닌 user 라는 파라미터로 받고싶으면,
+    //커스텀 데코레이터를 이용하면 됨.
+    //createParamDecorator
   }
 }

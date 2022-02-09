@@ -8,9 +8,13 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { User } from 'src/auth/user.entity';
 import { BoardStatus } from './board-status.enum';
 import { Board } from './board.entity';
 import { BoardsService } from './boards.service';
@@ -18,12 +22,19 @@ import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardStatusValidatationPipe } from './pipes/board-status-validation.pipe';
 
 @Controller('boards')
+@UseGuards(AuthGuard())
+//컨트롤러 레벨로 주면 모든 핸들러가 영향을 받음
 export class BoardsController {
   constructor(private boardService: BoardsService) {}
   // @Get('/')
   // getAllBoard(): Board[] {
   //   return this.boardService.getAllBoards();
   // }
+
+  @Get()
+  getAllBoard(): Promise<Board[]> {
+    return this.boardService.getAllBoards();
+  }
 
   @Post()
   @UsePipes(ValidationPipe)
