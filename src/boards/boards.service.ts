@@ -1,5 +1,6 @@
 import { Get, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/auth/user.entity';
 import { v1 as uuid } from 'uuid';
 import { BoardStatus } from './board-status.enum';
 import { Board } from './board.entity';
@@ -19,14 +20,28 @@ export class BoardsService {
   // //확인하기 좋음, 가독성증가
 
   async getAllBoards(): Promise<Board[]> {
-    const result = await this.boardRepository;
-    return result;
+    return this.boardRepository.find();
   }
   // getAllBoards(): Board[] {
   //   return this.boards;
   // }
 
-  async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+  async getUserBoards(user: User): Promise<Board[]> {
+    const query = this.boardRepository.createQueryBuilder('board');
+    //board table에서 하겠다.
+
+    query.where('board.userId = : userId', { userId: user.id });
+
+    const boards = await query.getMany();
+    //query 결과 여러개
+
+    return boards;
+  }
+
+  async createBoard(
+    createBoardDto: CreateBoardDto,
+    user: User,
+  ): Promise<Board> {
     // const { title, description } = createBoardDto;
     // //dto 의 값들을 가져옴.
     // const board = this.boardRepository.create({
@@ -38,7 +53,7 @@ export class BoardsService {
     // await this.boardRepository.save(board);
     // return board;
 
-    return this.boardRepository.createBoard(createBoardDto);
+    return this.boardRepository.createBoard(createBoardDto, user);
     //3:21
   }
   // createBoard(createBoardDto: CreateBoardDto) {
@@ -72,8 +87,10 @@ export class BoardsService {
   //   }
   //   return found;
   // }
-  async deleteBoard(id: number): Promise<void> {
-    const result = await this.boardRepository.delete(id);
+  async deleteBoard(id: number, user: User): Promise<void> {
+    const result = await this.boardRepository.delete({ id, user });
+    //delete 에는 하나의 인수가 필요하여 중괄호로 묶음
+    //조건이 2개임. user:user
     if (result.affected === 0) {
       //영향받는 결과의 수가  0이면
       throw new NotFoundException(`can not find ${id}`);

@@ -23,23 +23,31 @@ import { BoardStatusValidatationPipe } from './pipes/board-status-validation.pip
 
 @Controller('boards')
 @UseGuards(AuthGuard())
+
 //컨트롤러 레벨로 주면 모든 핸들러가 영향을 받음
 export class BoardsController {
   constructor(private boardService: BoardsService) {}
-  // @Get('/')
-  // getAllBoard(): Board[] {
-  //   return this.boardService.getAllBoards();
-  // }
 
   @Get()
   getAllBoard(): Promise<Board[]> {
     return this.boardService.getAllBoards();
   }
+  // @Get('/')
+  // getAllBoard(): Board[] {
+  //   return this.boardService.getAllBoards();
+  // }
+  @Get()
+  getUserBoard(@GetUser() user: User): Promise<Board[]> {
+    return this.boardService.getUserBoards(user);
+  }
 
   @Post()
   @UsePipes(ValidationPipe)
-  createBoard(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
-    return this.boardService.createBoard(createBoardDto);
+  createBoard(
+    @Body() createBoardDto: CreateBoardDto,
+    @GetUser() user: User,
+  ): Promise<Board> {
+    return this.boardService.createBoard(createBoardDto, user);
   } //create
 
   // @Post()
@@ -61,8 +69,11 @@ export class BoardsController {
   // }
 
   @Delete()
-  deleteBoard(@Param('id', ParseIntPipe) id): Promise<void> {
-    return this.boardService.deleteBoard(id);
+  deleteBoard(
+    @Param('id', ParseIntPipe) id,
+    @GetUser() user: User,
+  ): Promise<void> {
+    return this.boardService.deleteBoard(id, user);
     //이미만들어진 pipe  .  메서드로 오는 파라미터가 int로 잘 오는지?
   }
 

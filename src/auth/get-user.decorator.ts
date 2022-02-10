@@ -7,6 +7,5 @@ export const GetUser = createParamDecorator(
     const req = ctx.switchToHttp().getRequest();
 
     return req.user;
-    //05:18:40~ 지정된 사용자만 접근가능하게 하기.
   },
 );

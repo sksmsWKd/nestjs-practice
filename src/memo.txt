@@ -22,5 +22,27 @@ Pipes-유효성체크,데이터변환
 Filter-오류 처리
 Guards-인증 미들웨어, 지정된 경로 이용하는 사용자 통제 , Interceptors-... 
 
+relationship 정의
+-엔티티에 정의함
+-데코레이터 사용하며 인자3개
+-첫 파라미터는 타입, 접근방법 , eager-> 조인할건지?
+
+typeorm 사용할때도 query 를 사용 가능.
+querybuilder사용할것인가 ? repository api 사용할것인가?
+
+a.관계데코레이터 확인 
+b.헤더에 jwt같이
+5:34:20
+
+환경변수
+npm install -g win-node-env
+npm install config --save
+
+
+config 폴더생성, json , yaml파일생성.
+
+어느파일에서든지 config 모듈을 import 해서 사용하면 됨.
+import * as config from 'config'
+config.get('server')
 
 

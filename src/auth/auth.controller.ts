@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Logger,
   Post,
   Req,
   UseGuards,
@@ -14,6 +15,8 @@ import { User } from './user.entity';
 
 @Controller('auth')
 export class AuthController {
+  private logger = new Logger('BoardsController');
+  //명시, 이름은 자유
   constructor(private authService: AuthService) {}
 
   //localhost:3000/auth/signup
@@ -29,6 +32,7 @@ export class AuthController {
   signIn(
     @Body(ValidationPipe) authCredentialDTO: AuthCredentialsDto,
   ): Promise<{ accessToken: string }> {
+    this.logger.verbose(`User ${authCredentialDTO.username} has logged in`);
     return this.authService.signIn(authCredentialDTO);
   }
 
