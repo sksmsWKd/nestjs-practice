@@ -1,4 +1,6 @@
+import { Transform } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
+import { Logger } from '@nestjs/common';
 
 //dto 는, class, 와 interface 둘다 사용 가능.
 export class CreateBoardDto {

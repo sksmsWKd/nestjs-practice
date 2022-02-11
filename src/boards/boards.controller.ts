@@ -8,11 +8,13 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Res,
   UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { Response } from 'express';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/auth/user.entity';
 import { BoardStatus } from './board-status.enum';
@@ -43,6 +45,7 @@ export class BoardsController {
 
   @Post()
   @UsePipes(ValidationPipe)
+  //pipe가 존재함으로 인해 dto로 validation체크가능
   createBoard(
     @Body() createBoardDto: CreateBoardDto,
     @GetUser() user: User,
@@ -97,4 +100,9 @@ export class BoardsController {
   // ) {
   //   return this.boardService.updateBoardStatus(id, status);
   // }
+
+  @Get('/test')
+  testing(@Res() res: Response) {
+    res.sendFile('src\boardsabout.html');
+  }
 }
