@@ -8,6 +8,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Render,
   Res,
   UseGuards,
   UsePipes,
@@ -24,7 +25,7 @@ import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardStatusValidatationPipe } from './pipes/board-status-validation.pipe';
 
 @Controller('boards')
-@UseGuards(AuthGuard())
+// @UseGuards(AuthGuard())
 
 //컨트롤러 레벨로 주면 모든 핸들러가 영향을 받음
 export class BoardsController {
@@ -101,8 +102,8 @@ export class BoardsController {
   //   return this.boardService.updateBoardStatus(id, status);
   // }
 
-  @Get('/test')
-  testing(@Res() res: Response) {
-    res.sendFile('src\boardsabout.html');
+  @Get('pay')
+  pay() {
+    return this.boardService.pay();
   }
 }

@@ -114,4 +114,8 @@ export class BoardsService {
   //   board.status = status;
   //   return board;
   // }
+
+  async pay(): Promise<string> {
+    return 'hihi';
+  }
 }
