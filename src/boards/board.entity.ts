@@ -29,6 +29,7 @@ export class Board extends BaseEntity {
     cascade: ['update'],
   })
   user: User;
+  //many 쪽이 , 외래키가 들어옴.
 
   @OneToMany((type) => Addon, (addon) => addon.board, { eager: false })
   addon: Addon;

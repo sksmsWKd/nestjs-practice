@@ -31,6 +31,22 @@ import { BoardStatusValidatationPipe } from './pipes/board-status-validation.pip
 export class BoardsController {
   constructor(private boardService: BoardsService) {}
 
+  // pay() {
+  //   return this.boardService.pay();
+  // }
+  @Get()
+  testing(@Res() res: Response): void {
+    res.sendFile(__dirname + 'index.html');
+  }
+
+  // testing(@Res() res: Response) {
+  //   res.sendFile(__dirname + '/index.html');
+  // }
+  @Post('payfin')
+  payfin(@Body() asd: string): string {
+    return `paymend finished ${asd}`;
+  }
+
   @Get()
   getAllBoard(): Promise<Board[]> {
     return this.boardService.getAllBoards();
@@ -101,9 +117,4 @@ export class BoardsController {
   // ) {
   //   return this.boardService.updateBoardStatus(id, status);
   // }
-
-  @Get('pay')
-  pay() {
-    return this.boardService.pay();
-  }
 }

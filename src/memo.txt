@@ -46,3 +46,122 @@ import * as config from 'config'
 config.get('server')
 
 
+
+//결제내역 조회 예시
+{
+  "code": 0,
+  "message": null,
+  "response": {
+    "total": 24,
+    "previous": 0,
+    "next": 2,
+    "list": [
+      {
+        "amount": 100,
+        "apply_num": "30007639",
+        "bank_code": null,
+        "bank_name": null,
+        "buyer_addr": "캘리포니아 마운틴뷰 ",
+        "buyer_email": "scpark@gmail.com",
+        "buyer_name": "홍길동",
+        "buyer_postcode": "41416",
+        "buyer_tel": "010-1234-1234",
+        "cancel_amount": 0,
+        "cancel_history": [],
+        "cancel_reason": null,
+        "cancel_receipt_urls": [],
+        "cancelled_at": 0,
+        "card_code": "381",
+        "card_name": "국민KB카드",
+        "card_number": "949094*********1",
+        "card_quota": 0,
+        "card_type": 1,
+        "cash_receipt_issued": false,
+        "channel": "pc",
+        "currency": "KRW",
+        "custom_data": null,
+        "customer_uid": null,
+        "customer_uid_usage": null,
+        "emb_pg_provider": "naverpay",
+        "escrow": false,
+        "fail_reason": null,
+        "failed_at": 0,
+        "imp_uid": "imp_922299612976",
+        "merchant_uid": "nobody_1644740295192",
+        "name": "크라운 팥양갱12개 번들",
+        "paid_at": 1644740315,
+        "pay_method": "card",
+        "pg_id": "INIpayTest",
+        "pg_provider": "html5_inicis",
+        "pg_tid": "StdpayCARDINIpayTest20220213171834951924",
+        "receipt_url": "https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=StdpayCARDINIpayTest20220213171834951924&noMethod=1",
+        "started_at": 1644740299,
+        "status": "paid",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36",
+        "vbank_code": null,
+        "vbank_date": 0,
+        "vbank_holder": null,
+        "vbank_issued_at": 0,
+        "vbank_name": null,
+        "vbank_num": null
+      },
+      {
+        "amount": 100,
+        "apply_num": "30007628",
+        "bank_code": null,
+        "bank_name": null,
+        "buyer_addr": "캘리포니아 마운틴뷰 ",
+        "buyer_email": "scpark@gmail.com",
+        "buyer_name": "홍길동",
+        "buyer_postcode": "41416",
+        "buyer_tel": "010-1234-1234",
+        "cancel_amount": 0,
+        "cancel_history": [],
+        "cancel_reason": null,
+        "cancel_receipt_urls": [],
+        "cancelled_at": 0,
+        "card_code": "381",
+        "card_name": "국민KB카드",
+        "card_number": "949094*********2",
+        "card_quota": 0,
+        "card_type": 1,
+        "cash_receipt_issued": false,
+        "channel": "pc",
+        "currency": "KRW",
+        "custom_data": null,
+        "customer_uid": null,
+        "customer_uid_usage": null,
+        "emb_pg_provider": "naverpay",
+        "escrow": false,
+        "fail_reason": null,
+        "failed_at": 0,
+        "imp_uid": "imp_488219260423",
+        "merchant_uid": "nobody_1644740214840",
+        "name": "크라운 팥양갱12개 번들",
+        "paid_at": 1644740235,
+        "pay_method": "card",
+        "pg_id": "INIpayTest",
+        "pg_provider": "html5_inicis",
+        "pg_tid": "StdpayCARDINIpayTest20220213171714958912",
+        "receipt_url": "https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=StdpayCARDINIpayTest20220213171714958912&noMethod=1",
+        "started_at": 1644740219,
+        "status": "paid",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36",
+        "vbank_code": null,
+        "vbank_date": 0,
+        "vbank_holder": null,
+        "vbank_issued_at": 0,
+        "vbank_name": null,
+        "vbank_num": null
+      },
+      {
+
+			https://github.com/iamport/iamport-manual/blob/master/%EB%B9%84%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C/example/nice-api-billing-key.md
+
+			https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=tony950620&logNo=221323857845
+
+			https://api.iamport.kr/#/
+
+
+			https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=pjt3591oo&logNo=221346544567
+		설치하기

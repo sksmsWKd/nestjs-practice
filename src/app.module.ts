@@ -8,7 +8,14 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeORMConfig), BoardsModule, AuthModule],
+  imports: [
+    TypeOrmModule.forRoot(typeORMConfig),
+    BoardsModule,
+    AuthModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
+  ],
   controllers: [],
   providers: [],
 })
